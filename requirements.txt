@@ -1,0 +1,5 @@
+django
+python-dotenv
+psycopg2
+jupyter
+django-widget-tweaks
