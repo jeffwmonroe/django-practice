@@ -1,5 +1,5 @@
 django
 python-dotenv
 psycopg2
-jupyter
+# jupyter
 django-widget-tweaks

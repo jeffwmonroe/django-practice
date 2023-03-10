@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 # from django.conf.urls import url
 from boards import views
+from accounts import views as accounts_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('boards/<int:pk>/', views.board_by_pk, name='board_pk'),
     path('boards/<str:board_name>/', views.board, name='board'),
     path('boards/<str:board_name>/new/', views.new_topic, name='new_topic'),
+    path('signup/', accounts_views.signup, name='signup')
 ]
 
 
