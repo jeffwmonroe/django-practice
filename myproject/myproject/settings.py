@@ -89,6 +89,8 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_URL = 'login'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
