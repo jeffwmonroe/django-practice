@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseNotFound
 from django.contrib.auth.models import User
 from .forms import NewTopicForm
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -29,21 +31,21 @@ def board(request, board_name):
         return HttpResponseNotFound("Unknown Board")
 
 
+@login_required
 def new_topic(request, board_name):
     board = get_object_or_404(Board, name=board_name)
-    user = User.objects.first()  # TODO: get the currently logged in user
 
     if request.method == 'POST':
         form = NewTopicForm(request.POST)
         if form.is_valid():
             topic = form.save(commit=False)
             topic.board = board
-            topic.starter = user
+            topic.starter = request.user
             topic.save()
-            post = Post.objects.create(
+            Post.objects.create(
                 message=form.cleaned_data.get('message'),
                 topic=topic,
-                created_by=user
+                created_by=request.user
             )
 
             return redirect('board', board_name=board.name)  # TODO: redirect to the created topic page
